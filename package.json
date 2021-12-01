@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^4.17.2",
     "dagre": "^0.8.5",
     "localforage": "^1.10.0",
     "react": "^17.0.2",

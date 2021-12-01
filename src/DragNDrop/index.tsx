@@ -17,6 +17,8 @@ import ReactFlow, {
   Connection,
 } from 'react-flow-renderer';
 
+import FormModal from './modals/index'
+
 import computador from '../imagens/computador.jpg';
 import cpu from '../imagens/CPU.png';
 import disk from '../imagens/Disk.jpg';
@@ -29,6 +31,65 @@ import Sidebar from './Sidebar';
 
 import './dnd.css';
 
+const configs = {
+  computer: {
+    data: false,
+    hour: false,
+    memory_buffers: false,
+    memory_cache: false,
+    memory_free: false,
+    memory_shared: false,
+    memory_total: false,
+    memory_used: false,
+    name: 'Computador',
+    rsa: false,
+    swap_free: false,
+    swap_total: false,
+    swap_used: false,
+    zombie_process_total: false
+  },
+  cpu: {
+    gnice: true,
+    guest: false,
+    idle: false,
+    iowait: false,
+    irq: false,
+    name: 'CPU',
+    nice: false,
+    soft: false,
+    steal: false,
+    sys: false,
+    user: false
+  },
+  network: {
+    download_kb: false,
+    download_packet: false,
+    name: '',
+    upload_kb: false,
+    upload_packet: false
+  },
+  processes: {
+    name: '',
+    cpu: false,
+    mem: false,
+    virtmem: false,
+    resmem: false,
+  },
+  disk: {
+    blocks: false,
+    comment: '',
+    free_kb: false,
+    free_percent: false,
+    name: '/dev/sda',
+    total: false,
+    used_kb: false,
+    used_percent: false
+  },
+  memory: {
+    test: true
+  }
+}
+
 
 let id = 0;
 export const getId = (): ElementId => `node_${id++}`;
@@ -36,6 +97,10 @@ export const getId = (): ElementId => `node_${id++}`;
 const DnDFlow = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams>();
   const [elements, setElements] = useState<Elements>([]);
+  const [visible, setVisible] = useState<boolean>(false)
+  const [fields, setFields] = useState<any>({})
+  const [modalType, setModalType] = useState<string>('')
+
   const onConnect = (params: Connection | Edge) => {
     const { source, target } = params
     if (!source || !target) {
@@ -47,7 +112,9 @@ const DnDFlow = () => {
   const onElementsRemove = (elementsToRemove: Elements) => setElements((els) => removeElements(elementsToRemove, els));
   const onLoad = (_reactFlowInstance: OnLoadParams) => setReactFlowInstance(_reactFlowInstance);
   const onElementClick = (_: MouseEvent, element: FlowElement) => {
-    console.log(element)
+    setFields(element.data.payload)
+    setModalType(element.type ?? '')
+    setVisible(true)
   }
 
   const addEdgeInConnections = function (source: string, target: string): void | null {
@@ -86,6 +153,7 @@ const DnDFlow = () => {
     const { source, target } = connection
     const computer = getElement(target)
     const component = getElement(source)
+    console.log(computer)
     if (!computer || !component) {
       return false
     }
@@ -178,6 +246,28 @@ const DnDFlow = () => {
     network: CustomNetwork,
     processes: CustomProcesses
   };
+  const getConfigByType = (type: string): any => {
+    if (type === 'computer') {
+      return configs.computer
+    }
+    else if (type === 'cpu') {
+      return configs.cpu
+    }
+    else if (type === 'disk') {
+      return configs.disk
+    }
+    else if (type === 'memory') {
+      return configs.memory
+    }
+    else if (type === 'network') {
+      return configs.network
+    }
+    else if (type === 'processes') {
+      return configs.processes
+    }
+    return []
+  }
+
 
 
   /// BUG: adicona dois nós de uma vez
@@ -192,9 +282,10 @@ const DnDFlow = () => {
         position,
         data: {
           connections: [],
-          payload: {}
+          payload: getConfigByType(type)
         }
       };
+      console.log(newNode)
       setElements((es) => es.concat(newNode));
     }
   };
@@ -208,6 +299,12 @@ const DnDFlow = () => {
 
   return (
     <div className="dndflow">
+      <FormModal
+        visible={visible}
+        setVisible={setVisible}
+        fields={fields}
+        type={modalType}
+      />
       <ReactFlowProvider>
         <div className="reactflow-wrapper">
           <ReactFlow
