@@ -15,7 +15,7 @@ const initialElements: Elements = [
     id: '1',
     sourcePosition: Position.Right,
     type: 'input',
-    data: { label: 'Input' },
+    data: { label: <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.clipartpng.com%2Fidownload-image.php%3Ffile%3DComputer_CPU_PNG_Clipart-741.png&f=1&nofb=1" width="100" height="100"/> },
     position: { x: 0, y: 80 },
   },
   {
