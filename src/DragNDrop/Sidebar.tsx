@@ -1,7 +1,7 @@
 import React, { DragEvent } from 'react';
-import computador from '../imagens/computador.jpg';
+import computador from '../imagens/computador.png';
 import cpu from '../imagens/CPU.png';
-import disk from '../imagens/Disk.jpg';
+import disk from '../imagens/Disk.png';
 import memory from '../imagens/memory.png';
 import network from '../imagens/network.png';
 import process from '../imagens/Processes.png';
