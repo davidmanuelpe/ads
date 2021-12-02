@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
   Modal,
   Button,
@@ -21,7 +21,7 @@ interface IfieldType {
   type: string,
 }
 
-const ComputerFields = ({ fields }: any) => (
+const ComputerFields = () => (
   <>
     <Form.Item name="name" label="Name">
       <Input />
@@ -184,7 +184,7 @@ const MemoryFields = ({ fields }: any) => (
 const FieldsType = ({ fields, type }: IfieldType) => {
   console.log(type)
   if (type === 'computer') {
-    return (<ComputerFields fields={fields} />)
+    return (<ComputerFields />)
   }
   if (type === 'cpu') {
     return (<CpuFields fields={fields} />)
@@ -205,6 +205,12 @@ const FieldsType = ({ fields, type }: IfieldType) => {
 
 const FormModal = ({ visible, setVisible, fields, type, updatePayload, modalNodeId }: params) => {
   const handleCancel = () => setVisible(false)
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    console.log(fields)
+    form.setFieldsValue(fields)
+  }, [form, fields])
 
   const handleFinish = (values: any) => {
     updatePayload(modalNodeId, values)
@@ -214,8 +220,9 @@ const FormModal = ({ visible, setVisible, fields, type, updatePayload, modalNode
   return (
     <div>
       <Modal
+        bodyStyle={{ overflowY: 'scroll', height: 400 }}
         visible={visible}
-        title="Title"
+        title="Component"
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
@@ -227,6 +234,7 @@ const FormModal = ({ visible, setVisible, fields, type, updatePayload, modalNode
         ]}
       >
         <Form
+          form={form}
           id="modal-form"
           onFinish={handleFinish}
           initialValues={fields}

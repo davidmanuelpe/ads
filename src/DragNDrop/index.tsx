@@ -29,6 +29,7 @@ import network from '../imagens/network.png';
 import Sidebar from './Sidebar';
 
 import './dnd.css';
+import ShowScriptModal from './modals/scriptModal';
 
 const configs = {
   computer: {
@@ -103,9 +104,11 @@ const DnDFlow = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams>();
   const [elements, setElements] = useState<Elements>([]);
   const [visible, setVisible] = useState<boolean>(false)
+  const [showScriptModal, setShowScriptModal] = useState<boolean>(false)
   const [fields, setFields] = useState<any>({})
   const [modalType, setModalType] = useState<string>('')
   const [modalNodeId, setModalNodeId] = useState<string>('')
+  const [modalScriptValues, setModalScriptValues] = useState<string[]>([])
 
   const onConnect = (params: Connection | Edge) => {
     const { source, target } = params
@@ -184,8 +187,10 @@ const DnDFlow = () => {
       }
       return component
     }));
+    setFields(payload)
 
   }
+
   const getComputers = function (): [] {
     let computers: any = []
     if (id) {
@@ -213,7 +218,6 @@ const DnDFlow = () => {
       }
       data.push(payload)
     }
-    console.log(data)
     return data
   }
 
@@ -223,11 +227,7 @@ const DnDFlow = () => {
     return (
       <>
         <img alt="computer" src={computador} width="100" height="100" />
-        <span>Computer </span>
         <Handle type="target" position={Position.Right} isValidConnection={isValidConnection} />
-        <Handle type="target" position={Position.Left} isValidConnection={isValidConnection} />
-        <Handle type="target" position={Position.Bottom} isValidConnection={isValidConnection} />
-
       </>
     )
   };
@@ -236,9 +236,6 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="cpu" src={cpu} width="100" height="100" />
-      <br></br>
-      CPU
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -246,9 +243,7 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="disk" src={disk} width="100" height="100" />
-      <br></br>
-      Disk
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
+
     </>)
   };
 
@@ -256,9 +251,6 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="memory" src={memory} width="100" height="100" />
-      <br></br>
-      Memory
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -266,9 +258,6 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="network" src={network} width="100" height="100" />
-      <br></br>
-      Network
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -334,6 +323,11 @@ const DnDFlow = () => {
         fields={fields}
         type={modalType}
       />
+      <ShowScriptModal
+        visible={showScriptModal}
+        setVisible={setShowScriptModal}
+        data={modalScriptValues}
+      />
       <ReactFlowProvider>
         <div className="reactflow-wrapper">
           <ReactFlow
@@ -351,7 +345,7 @@ const DnDFlow = () => {
             <Controls />
           </ReactFlow>
         </div>
-        <Sidebar getAllElements={getAllElements} />
+        <Sidebar setShowScriptModal={setShowScriptModal} setScriptModalData={setModalScriptValues} getAllElements={getAllElements} />
       </ReactFlowProvider>
     </div>
   );

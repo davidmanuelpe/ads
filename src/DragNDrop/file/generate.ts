@@ -1,4 +1,3 @@
-
 const generateExecute = (elements: string[]) => {
 
   let cpu: string = "cpu =`mpstat 1 1 | grep Average`", mem = "mem=`free | grep Mem`", disk = "disk=`df`", eth01 = "eth01=`cat /proc/net/dev | grep eth0`";
@@ -213,7 +212,7 @@ const generateExecute = (elements: string[]) => {
 
     resposta[i] = script;
   }
-  console.log(resposta)
+  return resposta
 }
 
 export default generateExecute;
