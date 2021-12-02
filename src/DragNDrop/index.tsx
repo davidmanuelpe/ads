@@ -24,7 +24,6 @@ import cpu from '../imagens/CPU.png';
 import disk from '../imagens/Disk.png';
 import memory from '../imagens/memory.png';
 import network from '../imagens/network.png';
-import process from '../imagens/Processes.png';
 
 
 import Sidebar from './Sidebar';
@@ -49,7 +48,7 @@ const configs = {
     zombie_process_total: false
   },
   cpu: {
-    gnice: true,
+    gnice: false,
     guest: false,
     idle: false,
     iowait: false,
@@ -106,6 +105,7 @@ const DnDFlow = () => {
   const [visible, setVisible] = useState<boolean>(false)
   const [fields, setFields] = useState<any>({})
   const [modalType, setModalType] = useState<string>('')
+  const [modalNodeId, setModalNodeId] = useState<string>('')
 
   const onConnect = (params: Connection | Edge) => {
     const { source, target } = params
@@ -118,6 +118,7 @@ const DnDFlow = () => {
   const onElementsRemove = (elementsToRemove: Elements) => setElements((els) => removeElements(elementsToRemove, els));
   const onLoad = (_reactFlowInstance: OnLoadParams) => setReactFlowInstance(_reactFlowInstance);
   const onElementClick = (_: MouseEvent, element: FlowElement) => {
+    setModalNodeId(element.id)
     setFields(element.data.payload)
     setModalType(element.type ?? '')
     setVisible(true)
@@ -159,7 +160,6 @@ const DnDFlow = () => {
     const { source, target } = connection
     const computer = getElement(target)
     const component = getElement(source)
-    console.log(computer)
     if (!computer || !component) {
       return false
     }
@@ -175,9 +175,46 @@ const DnDFlow = () => {
     if (computerHastComponent) {
       return false
     }
-
-    console.log(true)
     return true
+  }
+  const updatePayload = (id: string, payload: []): void => {
+    setElements((components) => components.map(component => {
+      if (component.id === id) {
+        component.data.payload = payload
+      }
+      return component
+    }));
+
+  }
+  const getComputers = function (): [] {
+    let computers: any = []
+    if (id) {
+      setElements((es) => {
+        computers = es.filter(e => e.type === 'computer')
+        return es
+      });
+    }
+    return computers
+  }
+
+  interface StringMap { [key: string]: string; }
+
+  const getAllElements = function (): [] {
+    const computers: Node[] = getComputers()
+    const data: any = []
+    for (const computer of computers) {
+      let payload: StringMap = { computer: computer.data.payload }
+      for (const connection of computer.data.connections) {
+        const element = getElement(connection.id)
+        const elementType = element?.type
+        if (elementType) {
+          payload[elementType] = element?.data.payload
+        }
+      }
+      data.push(payload)
+    }
+    console.log(data)
+    return data
   }
 
   //custom nodes
@@ -188,7 +225,10 @@ const DnDFlow = () => {
         <img alt="computer" src={computador} width="100" height="100" />
         <span>Computer </span>
         <Handle type="target" position={Position.Right} isValidConnection={isValidConnection} />
-        </>
+        <Handle type="target" position={Position.Left} isValidConnection={isValidConnection} />
+        <Handle type="target" position={Position.Bottom} isValidConnection={isValidConnection} />
+
+      </>
     )
   };
 
@@ -198,6 +238,7 @@ const DnDFlow = () => {
       <img alt="cpu" src={cpu} width="100" height="100" />
       <br></br>
       CPU
+      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -207,6 +248,7 @@ const DnDFlow = () => {
       <img alt="disk" src={disk} width="100" height="100" />
       <br></br>
       Disk
+      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -216,6 +258,7 @@ const DnDFlow = () => {
       <img alt="memory" src={memory} width="100" height="100" />
       <br></br>
       Memory
+      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -225,14 +268,7 @@ const DnDFlow = () => {
       <img alt="network" src={network} width="100" height="100" />
       <br></br>
       Network
-    </>)
-  };
-
-  const CustomProcesses: FC<NodeProps> = ({ type, data }) => {
-    return (<>
-      <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
-      <img alt="process" src={process} width="100" height="100" />
-      Processes
+      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -242,7 +278,6 @@ const DnDFlow = () => {
     disk: CustomDisk,
     memory: CustomMemory,
     network: CustomNetwork,
-    processes: CustomProcesses
   };
   const getConfigByType = (type: string): any => {
     if (type === 'computer') {
@@ -260,13 +295,8 @@ const DnDFlow = () => {
     else if (type === 'network') {
       return configs.network
     }
-    else if (type === 'processes') {
-      return configs.processes
-    }
     return []
   }
-
-
 
   /// BUG: adicona dois nós de uma vez
   const onDrop = (event: DragEvent) => {
@@ -283,7 +313,6 @@ const DnDFlow = () => {
           payload: getConfigByType(type)
         }
       };
-      console.log(newNode)
       setElements((es) => es.concat(newNode));
     }
   };
@@ -298,6 +327,8 @@ const DnDFlow = () => {
   return (
     <div className="dndflow">
       <FormModal
+        modalNodeId={modalNodeId}
+        updatePayload={updatePayload}
         visible={visible}
         setVisible={setVisible}
         fields={fields}
@@ -320,7 +351,7 @@ const DnDFlow = () => {
             <Controls />
           </ReactFlow>
         </div>
-        <Sidebar />
+        <Sidebar getAllElements={getAllElements} />
       </ReactFlowProvider>
     </div>
   );
