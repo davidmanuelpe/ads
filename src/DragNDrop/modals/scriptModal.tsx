@@ -12,7 +12,6 @@ interface params {
 
 const ShowScriptModal = ({ visible, setVisible, data }: params) => {
   const handleCancel = () => setVisible(false)
-  console.log(data)
   return (
     <div>
       <Modal

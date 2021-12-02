@@ -187,8 +187,10 @@ const DnDFlow = () => {
       }
       return component
     }));
+    setFields(payload)
 
   }
+
   const getComputers = function (): [] {
     let computers: any = []
     if (id) {
@@ -216,7 +218,6 @@ const DnDFlow = () => {
       }
       data.push(payload)
     }
-    console.log(data)
     return data
   }
 
