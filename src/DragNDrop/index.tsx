@@ -33,19 +33,9 @@ import ShowScriptModal from './modals/scriptModal';
 
 const configs = {
   computer: {
-    data: false,
+    date: false,
     hour: false,
-    memory_buffers: false,
-    memory_cache: false,
-    memory_free: false,
-    memory_shared: false,
-    memory_total: false,
-    memory_used: false,
     name: 'Computador',
-    rsa: false,
-    swap_free: false,
-    swap_total: false,
-    swap_used: false,
     zombie_process_total: false
   },
   cpu: {
@@ -91,8 +81,11 @@ const configs = {
     used: false,
     free: false,
     shared: false,
-    buff_and_cache: false,
+    buff_cache: false,
     available: false,
+    swap_free: false,
+    swap_total: false,
+    swap_used: false,
   }
 }
 

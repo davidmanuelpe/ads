@@ -180,18 +180,23 @@ const generateExecute = (elements: string[]) => {
         variaveisFim += "$used_mem ";
         variaveisInicio += "MemUsed ";
       }
-      if (json.memory.used) {
+      if (json.memory.free) {
         variaveisMeio += "free_mem=`free | grep Mem | awk '{print $4}'`" + "<br />";
         variaveisFim += "$free_mem ";
         variaveisInicio += "MemFree ";
       }
+      if (json.memory.shared) {
+        variaveisMeio += "free_mem=`free | grep Mem | awk '{print $5}'`" + "<br />";
+        variaveisFim += "$shared ";
+        variaveisInicio += "Shared ";
+      }
       if (json.memory.buff_cache) {
-        variaveisMeio += "buff_cache_mem=`free | grep Mem | awk '{print $5}'`" + "<br />";
+        variaveisMeio += "buff_cache_mem=`free | grep Mem | awk '{print $6}'`" + "<br />";
         variaveisFim += "$buff_cache_mem ";
         variaveisInicio += "MemBuffCache ";
       }
-      if (json.memory.avaliable) {
-        variaveisMeio += "avaliable_mem=`free | grep Mem | awk '{print $6}'`" + "<br />";
+      if (json.memory.available) {
+        variaveisMeio += "avaliable_mem=`free | grep Mem | awk '{print $7}'`" + "<br />";
         variaveisFim += "$avaliable_mem ";
         variaveisInicio += "MemAvaliable ";
       }
