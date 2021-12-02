@@ -32,7 +32,7 @@ const generateExecute = (elements: string[]) => {
 
     if (json.cpu) {
 
-      variaveisMedicao += cpu;
+      variaveisMedicao += cpu + "<br />";
 
 
       if(!json.cpu.user && !json.cpu.nice && !json.cpu.sys && !json.cpu.iowait && !json.cpu.irq && !json.cpu.soft && !json.cpu.steal && !json.cpu.guest && !json.cpu.gnice && !json.cpu.idle){
@@ -102,7 +102,7 @@ const generateExecute = (elements: string[]) => {
 
     if (json.network) {
 
-      variaveisMedicao += eth01;
+      variaveisMedicao += eth01 + "<br />";
       if(!json.network.download_kb && !json.network.download_packet && !json.network.upload_kb) {
         variaveisFim += "$eth01 ";
       }
@@ -131,7 +131,7 @@ const generateExecute = (elements: string[]) => {
 
     if (json.disk) {
 
-      variaveisMedicao += disk;
+      variaveisMedicao += disk + "<br />";
       if(!json.disk.blocks && !json.disk.free_kb && !json.disk.free_percent && !json.disk.used_kb && !json.disk.used_percent){
         variaveisFim += "$disk ";
       }
@@ -165,7 +165,7 @@ const generateExecute = (elements: string[]) => {
 
     if (json.memory) {
 
-      variaveisMedicao += mem;
+      variaveisMedicao += mem + "<br />";
       if(!json.memory.total && !json.memory.used && !json.memory.buff_cache && !json.memory.avaliable && !json.memory.swap_free && !json.memory.swap_total && !json.memory.swap_used) {
         variaveisFim += "$mem ";
       }
