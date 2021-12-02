@@ -23,7 +23,9 @@ const ShowScriptModal = ({ visible, setVisible, data }: params) => {
           width="70%"
         >
           {data.map(script =>
-            <p> {script}</p>
+            <p>
+              <div dangerouslySetInnerHTML={{ __html: script }} />
+              </p>
           )}
         </Modal>
       ) : <></>
