@@ -12,12 +12,27 @@ interface params {
 
 const ShowScriptModal = ({ visible, setVisible, data }: params) => {
   const handleCancel = () => setVisible(false)
+
+  function download() {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data.join(',').replaceAll('<br />', '\n')));
+    element.setAttribute('download', 'script.sh');
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
+
   return (
     <div>
       {data.length > 0 ? (
         <Modal
           visible={visible}
-          onOk={handleCancel}
+          okText={'Baixar Script'}
+          onOk={download}
           title="Script"
           onCancel={handleCancel}
           width="70%"
