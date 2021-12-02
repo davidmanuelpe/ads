@@ -227,11 +227,7 @@ const DnDFlow = () => {
     return (
       <>
         <img alt="computer" src={computador} width="100" height="100" />
-        <span>Computer </span>
         <Handle type="target" position={Position.Right} isValidConnection={isValidConnection} />
-        <Handle type="target" position={Position.Left} isValidConnection={isValidConnection} />
-        <Handle type="target" position={Position.Bottom} isValidConnection={isValidConnection} />
-
       </>
     )
   };
@@ -240,9 +236,6 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="cpu" src={cpu} width="100" height="100" />
-      <br></br>
-      CPU
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -250,9 +243,7 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="disk" src={disk} width="100" height="100" />
-      <br></br>
-      Disk
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
+
     </>)
   };
 
@@ -260,9 +251,6 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="memory" src={memory} width="100" height="100" />
-      <br></br>
-      Memory
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 
@@ -270,9 +258,6 @@ const DnDFlow = () => {
     return (<>
       <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="network" src={network} width="100" height="100" />
-      <br></br>
-      Network
-      <Handle type="source" position={Position.Right} isValidConnection={isValidConnection} />
     </>)
   };
 

@@ -14,16 +14,20 @@ const ShowScriptModal = ({ visible, setVisible, data }: params) => {
   const handleCancel = () => setVisible(false)
   return (
     <div>
-      <Modal
-        visible={visible}
-        title="Script"
-        onCancel={handleCancel}
-        width="70%"
-      >
-        {data.map(script =>
-          <p> {script}</p>
-        )}
-      </Modal>
+      {data.length > 0 ? (
+        <Modal
+          visible={visible}
+          onOk={handleCancel}
+          title="Script"
+          onCancel={handleCancel}
+          width="70%"
+        >
+          {data.map(script =>
+            <p> {script}</p>
+          )}
+        </Modal>
+      ) : <></>
+      }
     </div>
   );
 };
