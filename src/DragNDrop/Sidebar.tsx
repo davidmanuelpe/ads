@@ -1,21 +1,36 @@
+import { Button } from 'antd';
 import React, { DragEvent } from 'react';
-import computador from '../imagens/computador.jpg';
+import { DownloadOutlined } from '@ant-design/icons';
+
+import Generate from './file/generate'
+
+import computador from '../imagens/computador.png';
 import cpu from '../imagens/CPU.png';
-import disk from '../imagens/Disk.jpg';
+import disk from '../imagens/Disk.png';
 import memory from '../imagens/memory.png';
 import network from '../imagens/network.png';
-import process from '../imagens/Processes.png';
+
+interface ISidebarParams {
+  getAllElements: () => any
+}
 
 const onDragStart = (event: DragEvent, nodeType: string) => {
   event.dataTransfer.setData('application/reactflow', nodeType);
   event.dataTransfer.effectAllowed = 'move';
 };
 
-const Sidebar = () => {
+const Sidebar = ({ getAllElements }: ISidebarParams) => {
+
+  const generateFile = () => {
+    const elements = getAllElements()
+    Generate(elements)
+  }
+
+
   return (
     <aside>
 
-      <div className="description">You can drag these nodes to the pane on the left.</div>
+      <div className="description">Arraste os nós para o painel à esquerda e ligue o Computador aos componentes.</div>
       <div className="react-flow__node-default"
         onDragStart={(event: DragEvent) => onDragStart(event, 'computer')} draggable>
         <img alt="computer" src={computador} width="100" height="100" />
@@ -45,11 +60,9 @@ const Sidebar = () => {
         <br></br>
         Network
       </div>
-      <div className="react-flow__node-default"
-        onDragStart={(event: DragEvent) => onDragStart(event, 'processes')} draggable>
-        <img alt="process" src={process} width="100" height="100" />
-        Processes
-      </div>
+      <Button onClick={() => generateFile()} type="primary" shape="round" icon={<DownloadOutlined />} size="large">
+        Download
+      </Button>
     </aside>
   );
 };

@@ -34,107 +34,11 @@ import './index.css';
 const routes = [
   {
     path: '/',
-    component: Overview,
-  },
-  {
-    path: '/edges',
-    component: Edges,
-  },
-  {
-    path: '/custom-node',
-    component: CustomNode,
+    component: DragNDrop,
   },
   {
     path: '/validation',
     component: Validation,
-  },
-  {
-    path: '/provider',
-    component: Provider,
-  },
-  {
-    path: '/stress',
-    component: Stress,
-  },
-  {
-    path: '/interaction',
-    component: Interaction,
-  },
-  {
-    path: '/basic',
-    component: Basic,
-  },
-  {
-    path: '/empty',
-    component: Empty,
-  },
-  {
-    path: '/hidden',
-    component: Hidden,
-  },
-  {
-    path: '/edge-types',
-    component: EdgeTypes,
-  },
-  {
-    path: '/custom-connectionline',
-    component: CustomConnectionLine,
-  },
-  {
-    path: '/floating-edges',
-    component: FloatingEdges,
-  },
-  {
-    path: '/nodetype-change',
-    component: NodeTypeChange,
-  },
-  {
-    path: '/nodetypesobject-change',
-    component: NodeTypesObjectChange,
-  },
-  {
-    path: '/updatable-edge',
-    component: UpdatableEdge,
-  },
-  {
-    path: '/update-node',
-    component: UpdateNode,
-  },
-  {
-    path: '/save-restore',
-    component: SaveRestore,
-  },
-  {
-    path: '/drag-and-drop',
-    component: DragNDrop,
-  },
-  {
-    path: '/layouting',
-    component: Layout,
-  },
-  {
-    path: '/switch',
-    component: SwitchFlows,
-  },
-  {
-    path: '/usezoompanhelper',
-    component: UseZoomPanHelper,
-  },
-  {
-    path: '/useupdatenodeinternals',
-    component: UseUpdateNodeInternals,
-  },
-  {
-    path: '/undirectional',
-    component: Undirectional,
-  },
-  {
-    path: '/multiflows',
-    component: MultiFlows,
-  },
-  {
-    path: '/draghandle',
-    component: DragHandle,
   },
 ];
 
@@ -149,7 +53,7 @@ const Header = withRouter(({ history, location }) => {
       <select defaultValue={location.pathname} onChange={onChange}>
         {routes.map((route) => (
           <option value={route.path} key={route.path}>
-            {route.path === '/' ? 'overview' : route.path.substr(1, route.path.length)}
+            {route.path === '/' ? 'monitoramento' : route.path.substr(1, route.path.length)}
           </option>
         ))}
       </select>
@@ -159,7 +63,8 @@ const Header = withRouter(({ history, location }) => {
 
 ReactDOM.render(
   <Router forceRefresh={true}>
-    <Header />
+    {/* <Header /> */}
+    {/* TODO: Fazer um Header bonito */}
     <Switch>
       {routes.map((route) => (
         <Route exact path={route.path} render={() => <route.component />} key={route.path} />

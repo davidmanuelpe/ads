@@ -11,7 +11,9 @@ interface params {
   visible: boolean,
   setVisible: any,
   fields: any,
-  type: string
+  type: string,
+  modalNodeId: string,
+  updatePayload: any
 }
 
 interface IfieldType {
@@ -21,28 +23,160 @@ interface IfieldType {
 
 const ComputerFields = ({ fields }: any) => (
   <>
-    <Form.Item label="Name">
-      <Input value={fields.name} />
+    <Form.Item name="name" label="Name">
+      <Input />
     </Form.Item>
-    <Form.Item label="Data">
-      <Switch checked={fields.data} />
+    <Form.Item name="data" valuePropName="checked" label="Data">
+      <Switch />
     </Form.Item>
-    <Form.Item label="Hour">
-      <Switch checked={fields.hour} />
+    <Form.Item name="hour" valuePropName="checked" label="Hour">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="memory_buffers" valuePropName="checked" label="Memory buffers">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="memory_cache" valuePropName="checked" label="Memory cache">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="memory_free" valuePropName="checked" label="Memory free">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="memory_shared" valuePropName="checked" label="Memory shared">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="memory_total" valuePropName="checked" label="Memory total">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="memory_used" valuePropName="checked" label="Memory used">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="rsa" valuePropName="checked" label="Rsa">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="swap_free" valuePropName="checked" label="Swap free">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="swap_total" valuePropName="checked" label="Swap total">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="swap_used" valuePropName="checked" label="Swap used">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="zombie_process_total" valuePropName="checked" label="Zombie process total">
+      <Switch />
     </Form.Item>
   </>
 )
 
 const CpuFields = ({ fields }: any) => (
   <>
-    <Form.Item label="Name">
-      <Input value={fields.name} />
+    <Form.Item name="name" label="Name">
+      <Input />
     </Form.Item>
-    <Form.Item label="Gnice">
-      <Switch checked={fields.gnice} />
+    <Form.Item name="gnice" valuePropName="checked" label="Gnice">
+      <Switch />
     </Form.Item>
-    <Form.Item label="Idle">
-      <Switch checked={fields.idle} />
+    <Form.Item name="idle" valuePropName="checked" label="Idle">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="guest" valuePropName="checked" label="Guest">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="iowait" valuePropName="checked" label="Iowait">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="irq" valuePropName="checked" label="Irq">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="nice" valuePropName="checked" label="Nice">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="soft" valuePropName="checked" label="Soft">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="steal" valuePropName="checked" label="Steal">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="sys" valuePropName="checked" label="Sys">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="user" valuePropName="checked" label="User">
+      <Switch />
+    </Form.Item>
+  </>
+)
+
+const NetworkFields = ({ fields }: any) => (
+  <>
+    <Form.Item name="name" label="Name">
+      <Input />
+    </Form.Item>
+    <Form.Item name="download_kb" valuePropName="checked" label="Download kb">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="download_packet" valuePropName="checked" label="Download packet">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="upload_kb" valuePropName="checked" label="Upload kb">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="upload_packet" valuePropName="checked" label="Upload packet">
+      <Switch />
+    </Form.Item>
+  </>
+)
+
+const DiskFields = ({ fields }: any) => (
+  <>
+    <Form.Item name="upload_kb" valuePropName="checked" label="Name">
+      <Input />
+    </Form.Item>
+    <Form.Item name="comment" valuePropName="checked" label="Comment">
+      <Input />
+    </Form.Item>
+    <Form.Item name="blocks" valuePropName="checked" label="Blocks">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="free_kb" valuePropName="checked" label="Free kb">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="free_percent" valuePropName="checked" label="Free percent">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="total" valuePropName="checked" label="Total">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="used_kb" valuePropName="checked" label="Used kb">
+      <Switch />
+    </Form.Item>
+    <Form.Item name="used_percent" valuePropName="checked" label="Used percent">
+      <Switch />
+    </Form.Item>
+  </>
+)
+
+const MemoryFields = ({ fields }: any) => (
+  <>
+    <Form.Item name="name" label="Name">
+      <Input />
+    </Form.Item>
+    <Form.Item name="total" valuePropName="checked" label="Total">
+      <Switch checked={fields.total} />
+    </Form.Item>
+    <Form.Item name="used" valuePropName="checked" label="Used">
+      <Switch checked={fields.used} />
+    </Form.Item>
+    <Form.Item name="free" valuePropName="checked" label="Free">
+      <Switch checked={fields.free} />
+    </Form.Item>
+    <Form.Item name="shared" valuePropName="checked" label="Shared">
+      <Switch checked={fields.shared} />
+    </Form.Item>
+    <Form.Item name="buff_and_cache" valuePropName="checked" label="Buff and cache">
+      <Switch checked={fields.buff_and_cache} />
+    </Form.Item>
+    <Form.Item name="available" valuePropName="checked" label="Available">
+      <Switch checked={fields.available} />
     </Form.Item>
   </>
 )
@@ -55,16 +189,26 @@ const FieldsType = ({ fields, type }: IfieldType) => {
   if (type === 'cpu') {
     return (<CpuFields fields={fields} />)
   }
+  if (type === 'network') {
+    return (<NetworkFields fields={fields} />)
+  }
+  if (type === 'disk') {
+    return (<DiskFields fields={fields} />)
+  }
+  if (type === 'memory') {
+    return (<MemoryFields fields={fields} />)
+  }
 
   return (<ComputerFields />)
 }
 
 
-const FormModal = ({ visible, setVisible, fields, type }: params) => {
+const FormModal = ({ visible, setVisible, fields, type, updatePayload, modalNodeId }: params) => {
   const handleCancel = () => setVisible(false)
 
   const handleFinish = (values: any) => {
-    console.log(values)
+    updatePayload(modalNodeId, values)
+    setVisible(false)
   }
 
   return (
@@ -72,7 +216,6 @@ const FormModal = ({ visible, setVisible, fields, type }: params) => {
       <Modal
         visible={visible}
         title="Title"
-        onOk={() => console.log('mandou')}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
@@ -83,7 +226,11 @@ const FormModal = ({ visible, setVisible, fields, type }: params) => {
           </Button>,
         ]}
       >
-        <Form id="modal-form" onFinish={handleFinish}>
+        <Form
+          id="modal-form"
+          onFinish={handleFinish}
+          initialValues={fields}
+        >
           <FieldsType type={type} fields={fields} />
         </Form>
       </Modal>
