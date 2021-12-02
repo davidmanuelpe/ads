@@ -29,6 +29,7 @@ import network from '../imagens/network.png';
 import Sidebar from './Sidebar';
 
 import './dnd.css';
+import ShowScriptModal from './modals/scriptModal';
 
 const configs = {
   computer: {
@@ -103,9 +104,11 @@ const DnDFlow = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams>();
   const [elements, setElements] = useState<Elements>([]);
   const [visible, setVisible] = useState<boolean>(false)
+  const [showScriptModal, setShowScriptModal] = useState<boolean>(false)
   const [fields, setFields] = useState<any>({})
   const [modalType, setModalType] = useState<string>('')
   const [modalNodeId, setModalNodeId] = useState<string>('')
+  const [modalScriptValues, setModalScriptValues] = useState<string[]>([])
 
   const onConnect = (params: Connection | Edge) => {
     const { source, target } = params
@@ -334,6 +337,11 @@ const DnDFlow = () => {
         fields={fields}
         type={modalType}
       />
+      <ShowScriptModal
+        visible={showScriptModal}
+        setVisible={setShowScriptModal}
+        data={modalScriptValues}
+      />
       <ReactFlowProvider>
         <div className="reactflow-wrapper">
           <ReactFlow
@@ -351,7 +359,7 @@ const DnDFlow = () => {
             <Controls />
           </ReactFlow>
         </div>
-        <Sidebar getAllElements={getAllElements} />
+        <Sidebar setShowScriptModal={setShowScriptModal} setScriptModalData={setModalScriptValues} getAllElements={getAllElements} />
       </ReactFlowProvider>
     </div>
   );

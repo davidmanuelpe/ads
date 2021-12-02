@@ -1,17 +1,19 @@
 import { Button } from 'antd';
 import React, { DragEvent } from 'react';
-import { DownloadOutlined } from '@ant-design/icons';
+import { PlayCircleOutlined } from '@ant-design/icons';
 
-import Generate from './file/generate'
 
 import computador from '../imagens/computador.png';
 import cpu from '../imagens/CPU.png';
 import disk from '../imagens/Disk.png';
 import memory from '../imagens/memory.png';
 import network from '../imagens/network.png';
+import generateExecute from './file/generate';
 
 interface ISidebarParams {
-  getAllElements: () => any
+  getAllElements: () => any,
+  setScriptModalData: any,
+  setShowScriptModal: any
 }
 
 const onDragStart = (event: DragEvent, nodeType: string) => {
@@ -19,17 +21,21 @@ const onDragStart = (event: DragEvent, nodeType: string) => {
   event.dataTransfer.effectAllowed = 'move';
 };
 
-const Sidebar = ({ getAllElements }: ISidebarParams) => {
+const Sidebar = ({ getAllElements, setScriptModalData, setShowScriptModal }: ISidebarParams) => {
 
-  const generateFile = () => {
+  const generateScript = () => {
     const elements = getAllElements()
-    Generate(elements)
+    const scripts = generateExecute(elements)
+    setScriptModalData(scripts)
+    setShowScriptModal(true)
   }
 
 
   return (
     <aside>
-
+      <Button onClick={() => generateScript()} type="primary" shape="round" icon={<PlayCircleOutlined />} size="large">
+        Run
+      </Button>
       <div className="description">Arraste os nós para o painel à esquerda e ligue o Computador aos componentes.</div>
       <div className="react-flow__node-default"
         onDragStart={(event: DragEvent) => onDragStart(event, 'computer')} draggable>
@@ -60,9 +66,6 @@ const Sidebar = ({ getAllElements }: ISidebarParams) => {
         <br></br>
         Network
       </div>
-      <Button onClick={() => generateFile()} type="primary" shape="round" icon={<DownloadOutlined />} size="large">
-        Download
-      </Button>
     </aside>
   );
 };
