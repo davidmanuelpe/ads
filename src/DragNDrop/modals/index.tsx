@@ -6,6 +6,8 @@ import {
     Switch,
     Input,
     TimePicker,
+    Select,
+    InputNumber,
 } from 'antd';
 
 import moment from 'moment'
@@ -25,27 +27,73 @@ interface IfieldType {
     onChange: any
 }
 
-const ComputerFields = (fields: any) => (
-    <>
-        <Form.Item name="time" label="Time">
-            <TimePicker
-                showNow={false}
-                defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />
-        </Form.Item>
-        <Form.Item name="name" label="Name">
-            <Input />
-        </Form.Item>
-        <Form.Item name="date" valuePropName="checked" label="Date">
-            <Switch />
-        </Form.Item>
-        <Form.Item name="hour" valuePropName="checked" label="Hour">
-            <Switch />
-        </Form.Item>
-        <Form.Item name="zombie_process_total" valuePropName="checked" label="Zombie process total">
-            <Switch />
-        </Form.Item>
-    </>
-)
+const ComputerFields = (fields: any) => {
+    const [remote, setRemote] = useState(false)
+    return (
+        <>
+            <Form.Item initialValue="bash" name="type" label="Script Type"
+                rules={[{ required: true, message: 'Please input your phone number!' }]}
+
+            >
+                <Select>
+                    <Select.Option value="bash">Bash</Select.Option>
+                    <Select.Option value="python">Python</Select.Option>
+                </Select>
+            </Form.Item>
+            <Form.Item name="local" initialValue="local" label="Local" required>
+                <Select onChange={(value) => {
+                    if (value === 'local') {
+                        setRemote(false)
+                    } else {
+                        setRemote(true)
+                    }
+                }}>
+                    <Select.Option value="local">Local</Select.Option>
+                    <Select.Option value="remote">Remote</Select.Option>
+                </Select>
+            </Form.Item>
+            {
+                remote && <>
+                    <Form.Item
+                        name="ip"
+                        label="IP"
+                        rules={[{ required: true, message: 'Please input IP!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="usarname" label="Username"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="password" label="Password"
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                    >
+                        <Input type="password" />
+                    </Form.Item>
+                </>
+            }
+            <Form.Item name="monitoring_time" label="Monitoring time">
+                <InputNumber />
+            </Form.Item>
+            <Form.Item name="monitoring_frequency" label="Monitoring frequency">
+                <InputNumber />
+            </Form.Item>
+            <Form.Item name="name" label="Name">
+                <Input />
+            </Form.Item>
+            <Form.Item name="date" valuePropName="checked" label="Date">
+                <Switch />
+            </Form.Item>
+            <Form.Item name="hour" valuePropName="checked" label="Hour">
+                <Switch />
+            </Form.Item>
+            <Form.Item name="zombie_process_total" valuePropName="checked" label="Zombie process total">
+                <Switch />
+            </Form.Item>
+        </>
+    )
+}
 
 const CpuFields = ({ fields }: any) => (
     <>

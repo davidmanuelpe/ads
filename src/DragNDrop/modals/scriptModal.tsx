@@ -6,10 +6,16 @@ import {
 
 const { TabPane } = Tabs;
 
+interface Iscript {
+  script: string,
+  type: string
+}
+
+
 interface params {
   visible: boolean,
   setVisible: any,
-  data: string[],
+  data: Iscript[],
 }
 
 const ShowScriptModal = ({ visible, setVisible, data }: params) => {
@@ -18,8 +24,17 @@ const ShowScriptModal = ({ visible, setVisible, data }: params) => {
 
   function download() {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data[computerIndex].replaceAll('<br />', '\n')));
-    element.setAttribute('download', 'script.sh');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data[computerIndex].script.replaceAll('<br />', '\n')));
+    console.log(data[computerIndex])
+    if (data[computerIndex].type === 'bash') {
+      element.setAttribute('download', 'script.sh');
+    }
+    else {
+      element.setAttribute('download', 'script.py');
+    }
+    // element.setAttribute('download', 'script.sh');
+
+
 
     element.style.display = 'none';
     document.body.appendChild(element);
@@ -44,10 +59,10 @@ const ShowScriptModal = ({ visible, setVisible, data }: params) => {
           width="70%"
         >
           <Tabs defaultActiveKey="1" onChange={callback}>
-            {data.map((script, index) =>
+            {data.map((payload, index) =>
               <TabPane tab={`computer ${index + 1}`} key={index}>
                 <p>
-                  <div dangerouslySetInnerHTML={{ __html: script }} />
+                  <div dangerouslySetInnerHTML={{ __html: payload.script }} />
                 </p>
               </TabPane>
             )}

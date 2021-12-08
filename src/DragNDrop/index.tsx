@@ -91,6 +91,10 @@ const configs = {
     swap_used: false,
   }
 }
+interface Iscript {
+  script: string,
+  type: string
+}
 
 
 let id = 0;
@@ -104,7 +108,7 @@ const DnDFlow = () => {
   const [fields, setFields] = useState<any>({})
   const [modalType, setModalType] = useState<string>('')
   const [modalNodeId, setModalNodeId] = useState<string>('')
-  const [modalScriptValues, setModalScriptValues] = useState<string[]>([])
+  const [modalScriptValues, setModalScriptValues] = useState<Iscript[]>([])
 
   const onConnect = (params: Connection | Edge) => {
     const { source, target } = params

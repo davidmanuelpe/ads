@@ -1,5 +1,5 @@
 const generateExecute = (elements: string[]) => {
-
+  console.log(elements)
   let cpu: string = "cpu=`mpstat 1 1 | grep Average`", mem = "mem=`free | grep Mem`", disk = "disk=`df`", eth01 = "eth01=`cat /proc/net/dev | grep eth0`";
 
   let resposta: string[] = new Array<string>(elements.length);
@@ -35,7 +35,7 @@ const generateExecute = (elements: string[]) => {
       variaveisMedicao += cpu + "<br />";
 
 
-      if(!json.cpu.user && !json.cpu.nice && !json.cpu.sys && !json.cpu.iowait && !json.cpu.irq && !json.cpu.soft && !json.cpu.steal && !json.cpu.guest && !json.cpu.gnice && !json.cpu.idle){
+      if (!json.cpu.user && !json.cpu.nice && !json.cpu.sys && !json.cpu.iowait && !json.cpu.irq && !json.cpu.soft && !json.cpu.steal && !json.cpu.guest && !json.cpu.gnice && !json.cpu.idle) {
         variaveisFim += "$cpu ";
       }
 
@@ -103,7 +103,7 @@ const generateExecute = (elements: string[]) => {
     if (json.network) {
 
       variaveisMedicao += eth01 + "<br />";
-      if(!json.network.download_kb && !json.network.download_packet && !json.network.upload_kb) {
+      if (!json.network.download_kb && !json.network.download_packet && !json.network.upload_kb) {
         variaveisFim += "$eth01 ";
       }
 
@@ -132,7 +132,7 @@ const generateExecute = (elements: string[]) => {
     if (json.disk) {
 
       variaveisMedicao += disk + "<br />";
-      if(!json.disk.blocks && !json.disk.free_kb && !json.disk.free_percent && !json.disk.used_kb && !json.disk.used_percent){
+      if (!json.disk.blocks && !json.disk.free_kb && !json.disk.free_percent && !json.disk.used_kb && !json.disk.used_percent) {
         variaveisFim += "$disk ";
       }
 
@@ -166,7 +166,7 @@ const generateExecute = (elements: string[]) => {
     if (json.memory) {
 
       variaveisMedicao += mem + "<br />";
-      if(!json.memory.total && !json.memory.used && !json.memory.buff_cache && !json.memory.avaliable && !json.memory.swap_free && !json.memory.swap_total && !json.memory.swap_used) {
+      if (!json.memory.total && !json.memory.used && !json.memory.buff_cache && !json.memory.avaliable && !json.memory.swap_free && !json.memory.swap_total && !json.memory.swap_used) {
         variaveisFim += "$mem ";
       }
 
