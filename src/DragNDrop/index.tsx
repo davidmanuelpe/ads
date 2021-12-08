@@ -15,6 +15,7 @@ import ReactFlow, {
   NodeProps,
   NodeTypesType,
   Connection,
+  Background,
 } from 'react-flow-renderer';
 
 import FormModal from './modals/index'
@@ -36,7 +37,9 @@ const configs = {
     date: false,
     hour: false,
     name: 'Computador',
-    zombie_process_total: false
+    zombie_process_total: false,
+    time: 0,
+    monitoring_frequency: 0,
   },
   cpu: {
     gnice: false,
@@ -88,6 +91,10 @@ const configs = {
     swap_used: false,
   }
 }
+interface Iscript {
+  script: string,
+  type: string
+}
 
 
 let id = 0;
@@ -101,7 +108,7 @@ const DnDFlow = () => {
   const [fields, setFields] = useState<any>({})
   const [modalType, setModalType] = useState<string>('')
   const [modalNodeId, setModalNodeId] = useState<string>('')
-  const [modalScriptValues, setModalScriptValues] = useState<string[]>([])
+  const [modalScriptValues, setModalScriptValues] = useState<Iscript[]>([])
 
   const onConnect = (params: Connection | Edge) => {
     const { source, target } = params
@@ -174,6 +181,7 @@ const DnDFlow = () => {
     return true
   }
   const updatePayload = (id: string, payload: []): void => {
+    console.log(payload)
     setElements((components) => components.map(component => {
       if (component.id === id) {
         component.data.payload = payload
@@ -215,26 +223,27 @@ const DnDFlow = () => {
   }
 
   //custom nodes
+  const customNodeStyle = { width: 15, height: 15, backgroundColor: '#2d2d52' }
 
   const CustomComputer: FC<NodeProps> = () => {
     return (
       <>
         <img alt="computer" src={computador} width="100" height="100" />
-        <Handle type="target" position={Position.Right} isValidConnection={isValidConnection} />
+        <Handle style={customNodeStyle} type="target" position={Position.Right} isValidConnection={isValidConnection} />
       </>
     )
   };
 
   const CustomCpu: FC<NodeProps> = ({ type, data }) => {
     return (<>
-      <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
+      <Handle style={customNodeStyle} type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="cpu" src={cpu} width="100" height="100" />
     </>)
   };
 
   const CustomDisk: FC<NodeProps> = ({ type, data }) => {
     return (<>
-      <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
+      <Handle style={customNodeStyle} type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="disk" src={disk} width="100" height="100" />
 
     </>)
@@ -242,14 +251,14 @@ const DnDFlow = () => {
 
   const CustomMemory: FC<NodeProps> = ({ type, data }) => {
     return (<>
-      <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
+      <Handle style={customNodeStyle} type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="memory" src={memory} width="100" height="100" />
     </>)
   };
 
   const CustomNetwork: FC<NodeProps> = ({ type, data }) => {
     return (<>
-      <Handle type="source" position={Position.Left} isValidConnection={isValidConnection} />
+      <Handle style={customNodeStyle} type="source" position={Position.Left} isValidConnection={isValidConnection} />
       <img alt="network" src={network} width="100" height="100" />
     </>)
   };
@@ -335,6 +344,11 @@ const DnDFlow = () => {
             onDragOver={onDragOver}
             onNodeDoubleClick={onElementClick}
           >
+            <Background
+              gap={20}
+              size={1}
+            // style={{ backgroundImage: "URL('https://static.remove.bg/remove-bg-web/54743c30904cc98f30bb79359718a5ffd69392cd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg')" }}
+            />
             <Controls />
           </ReactFlow>
         </div>
