@@ -36,7 +36,9 @@ const configs = {
     date: false,
     hour: false,
     name: 'Computador',
-    zombie_process_total: false
+    zombie_process_total: false,
+    time: 0,
+    monitoring_frequency: 0,
   },
   cpu: {
     gnice: false,
@@ -174,6 +176,7 @@ const DnDFlow = () => {
     return true
   }
   const updatePayload = (id: string, payload: []): void => {
+    console.log(payload)
     setElements((components) => components.map(component => {
       if (component.id === id) {
         component.data.payload = payload

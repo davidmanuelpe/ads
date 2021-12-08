@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
-  Button,
+  Tabs,
 } from 'antd';
+
+const { TabPane } = Tabs;
 
 interface params {
   visible: boolean,
@@ -11,19 +13,24 @@ interface params {
 }
 
 const ShowScriptModal = ({ visible, setVisible, data }: params) => {
+  const [computerIndex, setComputerIndex] = useState(0)
   const handleCancel = () => setVisible(false)
 
   function download() {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data.join(',').replaceAll('<br />', '\n')));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data[computerIndex].replaceAll('<br />', '\n')));
     element.setAttribute('download', 'script.sh');
-  
+
     element.style.display = 'none';
     document.body.appendChild(element);
-  
+
     element.click();
-  
+
     document.body.removeChild(element);
+  }
+
+  function callback(key: string) {
+    setComputerIndex(Number(key))
   }
 
   return (
@@ -33,19 +40,22 @@ const ShowScriptModal = ({ visible, setVisible, data }: params) => {
           visible={visible}
           okText={'Baixar Script'}
           onOk={download}
-          title="Script"
           onCancel={handleCancel}
           width="70%"
         >
-          {data.map(script =>
-            <p>
-              <div dangerouslySetInnerHTML={{ __html: script }} />
-              </p>
-          )}
+          <Tabs defaultActiveKey="1" onChange={callback}>
+            {data.map((script, index) =>
+              <TabPane tab={`computer ${index + 1}`} key={index}>
+                <p>
+                  <div dangerouslySetInnerHTML={{ __html: script }} />
+                </p>
+              </TabPane>
+            )}
+          </Tabs>
         </Modal>
       ) : <></>
       }
-    </div>
+    </div >
   );
 };
 

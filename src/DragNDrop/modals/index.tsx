@@ -1,11 +1,14 @@
-import React, {FC, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Modal,
     Button,
     Form,
     Switch,
     Input,
+    TimePicker,
 } from 'antd';
+
+import moment from 'moment'
 
 interface params {
     visible: boolean,
@@ -19,187 +22,210 @@ interface params {
 interface IfieldType {
     fields: any,
     type: string,
+    onChange: any
 }
 
-const ComputerFields = () => (
+const ComputerFields = (fields: any) => (
     <>
+        <Form.Item name="time" label="Time">
+            <TimePicker
+                showNow={false}
+                defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />
+        </Form.Item>
         <Form.Item name="name" label="Name">
-            <Input/>
+            <Input />
         </Form.Item>
         <Form.Item name="date" valuePropName="checked" label="Date">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="hour" valuePropName="checked" label="Hour">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="zombie_process_total" valuePropName="checked" label="Zombie process total">
-            <Switch/>
+            <Switch />
         </Form.Item>
     </>
 )
 
-const CpuFields = ({fields}: any) => (
+const CpuFields = ({ fields }: any) => (
     <>
         <Form.Item name="name" label="Name">
-            <Input/>
+            <Input />
         </Form.Item>
         <Form.Item name="gnice" valuePropName="checked" label="Gnice">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="idle" valuePropName="checked" label="Idle">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="guest" valuePropName="checked" label="Guest">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="iowait" valuePropName="checked" label="Iowait">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="irq" valuePropName="checked" label="Irq">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="nice" valuePropName="checked" label="Nice">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="soft" valuePropName="checked" label="Soft">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="steal" valuePropName="checked" label="Steal">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="sys" valuePropName="checked" label="Sys">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="user" valuePropName="checked" label="User">
-            <Switch/>
+            <Switch />
         </Form.Item>
     </>
 )
 
-const NetworkFields = ({fields}: any) => (
+const NetworkFields = ({ fields }: any) => (
     <>
         <Form.Item name="name" label="Name">
-            <Input/>
+            <Input />
         </Form.Item>
         <Form.Item name="download_kb" valuePropName="checked" label="Download kb">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="download_packet" valuePropName="checked" label="Download packet">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="upload_kb" valuePropName="checked" label="Upload kb">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="upload_packet" valuePropName="checked" label="Upload packet">
-            <Switch/>
+            <Switch />
         </Form.Item>
     </>
 )
 
-const DiskFields = ({fields}: any) => (
+const DiskFields = ({ fields }: any) => (
     <>
         <Form.Item name="upload_kb" valuePropName="checked" label="Name">
-            <Input/>
+            <Input />
         </Form.Item>
         <Form.Item name="comment" valuePropName="checked" label="Comment">
-            <Input/>
+            <Input />
         </Form.Item>
         <Form.Item name="blocks" valuePropName="checked" label="Blocks">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="free_kb" valuePropName="checked" label="Free kb">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="free_percent" valuePropName="checked" label="Free percent">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="total" valuePropName="checked" label="Total">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="used_kb" valuePropName="checked" label="Used kb">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="used_percent" valuePropName="checked" label="Used percent">
-            <Switch/>
+            <Switch />
         </Form.Item>
     </>
 )
 
-const MemoryFields = ({fields}: any) => (
+const MemoryFields = ({ fields }: any) => (
     <>
         <Form.Item name="name" label="Name">
-            <Input/>
+            <Input />
         </Form.Item>
         <Form.Item name="total" valuePropName="checked" label="Total">
-            <Switch checked={fields.total}/>
+            <Switch checked={fields.total} />
         </Form.Item>
         <Form.Item name="used" valuePropName="checked" label="Used">
-            <Switch checked={fields.used}/>
+            <Switch checked={fields.used} />
         </Form.Item>
         <Form.Item name="free" valuePropName="checked" label="Free">
-            <Switch checked={fields.free}/>
+            <Switch checked={fields.free} />
         </Form.Item>
         <Form.Item name="shared" valuePropName="checked" label="Shared">
-            <Switch checked={fields.shared}/>
+            <Switch checked={fields.shared} />
         </Form.Item>
         <Form.Item name="buff_cache" valuePropName="checked" label="Buff and cache">
-            <Switch checked={fields.buff_and_cache}/>
+            <Switch checked={fields.buff_and_cache} />
         </Form.Item>
         <Form.Item name="available" valuePropName="checked" label="Available">
-            <Switch checked={fields.available}/>
+            <Switch checked={fields.available} />
         </Form.Item>
         <Form.Item name="swap_free" valuePropName="checked" label="Swap free">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="swap_total" valuePropName="checked" label="Swap total">
-            <Switch/>
+            <Switch />
         </Form.Item>
         <Form.Item name="swap_used" valuePropName="checked" label="Swap used">
-            <Switch/>
+            <Switch />
         </Form.Item>
     </>
 )
 
-const FieldsType = ({fields, type}: IfieldType) => {
+const FieldsType = ({ fields, type, onChange }: IfieldType) => {
     console.log(type)
     if (type === 'computer') {
-        return (<ComputerFields/>)
+        return (<ComputerFields fields={fields} />)
     }
     if (type === 'cpu') {
-        return (<CpuFields fields={fields}/>)
+        return (<CpuFields fields={fields} />)
     }
     if (type === 'network') {
-        return (<NetworkFields fields={fields}/>)
+        return (<NetworkFields fields={fields} />)
     }
     if (type === 'disk') {
-        return (<DiskFields fields={fields}/>)
+        return (<DiskFields fields={fields} />)
     }
     if (type === 'memory') {
-        return (<MemoryFields fields={fields}/>)
+        return (<MemoryFields fields={fields} />)
     }
 
-    return (<ComputerFields/>)
+    return (<ComputerFields />)
 }
 
 
-const FormModal = ({visible, setVisible, fields, type, updatePayload, modalNodeId}: params) => {
-    const handleCancel = () => setVisible(false)
+const FormModal = ({ visible, setVisible, fields, type, updatePayload, modalNodeId }: params) => {
+    const [showTime, setShowTime] = useState(false)
     const [form] = Form.useForm()
 
     useEffect(() => {
-        console.log(fields)
-        form.setFieldsValue(fields)
+        let values = fields
+        if (fields.time) {
+            const duration = moment.utc(fields.time * 1000).format('HH:mm:ss')
+            values.time = moment(duration, 'HH:mm:ss')
+        }
+        console.log(values)
+        form.setFieldsValue(values)
     }, [form, fields])
 
+    const handleCancel = () => setVisible(false)
+
+
+    function onTimeChange(time: any, timeString: string) {
+        console.log(time, timeString);
+
+    }
+
     const handleFinish = (values: any) => {
-        updatePayload(modalNodeId, values)
+        let payload = values
+        if (values.time) {
+            payload.time = values.time.diff(moment().startOf('day'), 'seconds')
+        }
+        updatePayload(modalNodeId, payload)
         setVisible(false)
     }
 
     return (
         <div>
             <Modal
-                bodyStyle={{overflowY: 'scroll', height: 400}}
+                bodyStyle={{ overflowY: 'scroll', height: 400 }}
                 visible={visible}
                 title="Component"
                 onCancel={handleCancel}
@@ -218,7 +244,7 @@ const FormModal = ({visible, setVisible, fields, type, updatePayload, modalNodeI
                     onFinish={handleFinish}
                     initialValues={fields}
                 >
-                    <FieldsType type={type} fields={fields}/>
+                    <FieldsType onChange={onTimeChange} type={type} fields={fields} />
                 </Form>
             </Modal>
         </div>
