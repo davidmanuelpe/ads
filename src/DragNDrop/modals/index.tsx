@@ -101,28 +101,28 @@ const CpuFields = ({ fields }: any) => (
             <Input />
         </Form.Item>
         <Form.Item name="gnice" valuePropName="checked" label="Gnice">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="idle" valuePropName="checked" label="Idle">
             <Switch />
         </Form.Item>
         <Form.Item name="guest" valuePropName="checked" label="Guest">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="iowait" valuePropName="checked" label="Iowait">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="irq" valuePropName="checked" label="Irq">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="nice" valuePropName="checked" label="Nice">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="soft" valuePropName="checked" label="Soft">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="steal" valuePropName="checked" label="Steal">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="sys" valuePropName="checked" label="Sys">
             <Switch />
@@ -162,10 +162,10 @@ const DiskFields = ({ fields }: any) => (
             <Input />
         </Form.Item>
         <Form.Item name="blocks" valuePropName="checked" label="Blocks">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="free_kb" valuePropName="checked" label="Free kb">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="free_percent" valuePropName="checked" label="Free percent">
             <Switch />
@@ -174,7 +174,7 @@ const DiskFields = ({ fields }: any) => (
             <Switch />
         </Form.Item>
         <Form.Item name="used_kb" valuePropName="checked" label="Used kb">
-            <Switch />
+            <Switch /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="used_percent" valuePropName="checked" label="Used percent">
             <Switch />
@@ -197,10 +197,10 @@ const MemoryFields = ({ fields }: any) => (
             <Switch checked={fields.free} />
         </Form.Item>
         <Form.Item name="shared" valuePropName="checked" label="Shared">
-            <Switch checked={fields.shared} />
+            <Switch checked={fields.shared} /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="buff_cache" valuePropName="checked" label="Buff and cache">
-            <Switch checked={fields.buff_and_cache} />
+            <Switch checked={fields.buff_and_cache} /> <p style={{color:"Tomato"}}> (Esse comando não existe na lib psutil do python) </p>
         </Form.Item>
         <Form.Item name="available" valuePropName="checked" label="Available">
             <Switch checked={fields.available} />
