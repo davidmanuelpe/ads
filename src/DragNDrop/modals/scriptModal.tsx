@@ -32,9 +32,6 @@ const ShowScriptModal = ({ visible, setVisible, data }: params) => {
     else {
       element.setAttribute('download', 'script.py');
     }
-    // element.setAttribute('download', 'script.sh');
-
-
 
     element.style.display = 'none';
     document.body.appendChild(element);

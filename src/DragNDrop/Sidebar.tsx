@@ -26,13 +26,10 @@ const Sidebar = ({ getAllElements, setScriptModalData, setShowScriptModal }: ISi
   const generateScript = () => {
     const elements = getAllElements()
     const scripts = generateExecute(elements)
-    console.log(elements)
-    console.log(scripts);
-
+  
     setScriptModalData(scripts.map((script, index) => ({
       script: script,
       type: elements[index].computer.type
-
     })))
     setShowScriptModal(true)
   }
