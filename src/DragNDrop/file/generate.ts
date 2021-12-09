@@ -280,86 +280,86 @@ function generateScriptPython(componentes: any){
 
     if (componentes.cpu) {
         if (componentes.cpu.user) {
-            variaveis += "cpu_user = psutil.cpu_times().user" + "<br />";
-            prints += "print(cpu_user)" + "<br />";
+            variaveis += "    cpu_user = psutil.cpu_times().user" + "<br />";
+            prints += "    print(cpu_user)" + "<br />";
         }
 
         if (componentes.cpu.sys) {
-            variaveis += "cpu_system = psutil.cpu_times().system" + "<br />";
-            prints += "print(cpu_system)" + "<br />";
+            variaveis += "    cpu_system = psutil.cpu_times().system" + "<br />";
+            prints += "    print(cpu_system)" + "<br />";
         }
 
         if (componentes.cpu.idle) {
-            variaveis += "cpu_idle = psutil.cpu_times().idle" + "<br />";
-            prints += "print(cpu_idle)" + "<br />";
+            variaveis += "    cpu_idle = psutil.cpu_times().idle" + "<br />";
+            prints += "    print(cpu_idle)" + "<br />";
         }
     }
 
     if (componentes.network) {
         if (componentes.network.download_kb) {
-            variaveis += "network_download = psutil.net_io_counters().bytes_recv" + "<br />";
-            prints += "print(network_download)" + "<br />";
+            variaveis += "    network_download = psutil.net_io_counters().bytes_recv" + "<br />";
+            prints += "    print(network_download)" + "<br />";
         }
         if (componentes.network.download_packet) {
-            variaveis += "network_download_packet = psutil.net_io_counters().packets_recv" + "<br />";
-            prints += "print(network_download_packet)" + "<br />";
+            variaveis += "    network_download_packet = psutil.net_io_counters().packets_recv" + "<br />";
+            prints += "    print(network_download_packet)" + "<br />";
         }
         if (componentes.network.upload_kb) {
-            variaveis += "network_upload = psutil.net_io_counters().bytes_sent" + "<br />";
-            prints += "print(network_upload)" + "<br />";
+            variaveis += "    network_upload = psutil.net_io_counters().bytes_sent" + "<br />";
+            prints += "    print(network_upload)" + "<br />";
         }
         if (componentes.network.upload_kb) {
-            variaveis += "network_upload_packet = psutil.net_io_counters().packets_sent" + "<br />";
-            prints += "print(network_upload_packet)" + "<br />";
+            variaveis += "    network_upload_packet = psutil.net_io_counters().packets_sent" + "<br />";
+            prints += "    print(network_upload_packet)" + "<br />";
         }
     }
 
     if (componentes.disk) {
         if (componentes.disk.total) {
-            variaveis += "disk_total = psutil.disk_usage(\"/\")[0]" + "<br />";
-            prints += "print(disk_total)" + "<br />";
+            variaveis += "    disk_total = psutil.disk_usage(\"/\")[0]" + "<br />";
+            prints += "    print(disk_total)" + "<br />";
         }
         if (componentes.disk.free_percent) {
             if(!componentes.disk.total){
                 variaveis += "disk_total = psutil.disk_usage(\"/\")[0]" + "<br />";
             }
-            variaveis += "disk_free_percent = psutil.disk_usage(\"/\")[2] * 100 / disk_total" + "<br />";
-            prints += "print(disk_total)" + "<br />";
+            variaveis += "    disk_free_percent = psutil.disk_usage(\"/\")[2] * 100 / disk_total" + "<br />";
+            prints += "    print(disk_total)" + "<br />";
         }
         if (componentes.disk.used_percent) {
-            variaveis += "disk_used_percent = psutil.disk_usage(\"/\")[3]" + "<br />";
-            prints += "print(disk_used_percent)" + "<br />";
+            variaveis += "    disk_used_percent = psutil.disk_usage(\"/\")[3]" + "<br />";
+            prints += "    print(disk_used_percent)" + "<br />";
         }
     }
 
     if (componentes.memory) {
         if (componentes.memory.total) {
-            variaveis += "mem_total = psutil.virtual_memory().total" + "<br />";
-            prints += "print(mem_total)" + "<br />";
+            variaveis += "    mem_total = psutil.virtual_memory().total" + "<br />";
+            prints += "    print(mem_total)" + "<br />";
         }
         if (componentes.memory.used) {
-            variaveis += "mem_used = psutil.virtual_memory().used" + "<br />";
-            prints += "print(mem_used)" + "<br />";
+            variaveis += "    mem_used = psutil.virtual_memory().used" + "<br />";
+            prints += "    print(mem_used)" + "<br />";
         }
         if (componentes.memory.free) {
-            variaveis += "mem_free = psutil.virtual_memory().free" + "<br />";
-            prints += "print(mem_free)" + "<br />";
+            variaveis += "    mem_free = psutil.virtual_memory().free" + "<br />";
+            prints += "    print(mem_free)" + "<br />";
         }
         if (componentes.memory.available) {
-            variaveis += "mem_available= psutil.virtual_memory().available" + "<br />";
-            prints += "print(mem_available)" + "<br />";
+            variaveis += "    mem_available= psutil.virtual_memory().available" + "<br />";
+            prints += "    print(mem_available)" + "<br />";
         }
         if (componentes.memory.swap_free) {
-            variaveis += "mem_swap_free = psutil.swap_memory().free" + "<br />";
-            prints += "print(mem_swap_free)" + "<br />";
+            variaveis += "    mem_swap_free = psutil.swap_memory().free" + "<br />";
+            prints += "    print(mem_swap_free)" + "<br />";
         }
         if (componentes.memory.swap_total) {
-            variaveis += "mem_swap_total = psutil.swap_memory().total" + "<br />";
-            prints += "print(mem_swap_total)" + "<br />";
+            variaveis += "    mem_swap_total = psutil.swap_memory().total" + "<br />";
+            prints += "    print(mem_swap_total)" + "<br />";
         }
         if (componentes.memory.swap_used) {
-            variaveis += "mem_swap_used = psutil.swap_memory().used" + "<br />";
-            prints += "print(mem_swap_used)" + "<br />";
+            variaveis += "    mem_swap_used = psutil.swap_memory().used" + "<br />";
+            prints += "    print(mem_swap_used)" + "<br />";
         }
     }
 
